@@ -1,0 +1,15 @@
+{
+    "name": "jatinbphp/contactform",
+    "description": "Custom laravel package development",
+    "type": "project",
+    "require": {},
+    "authors": [{
+       "name": "Bhavesh Rabadiya",
+        "email": "bhavesh.ra.php@email.com"
+     }],
+    "autoload": {
+    "psr-4": {
+             "Jatinbphp\\Contactform\\": "src/"
+        }
+    }
+}
