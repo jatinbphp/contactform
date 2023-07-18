@@ -39,7 +39,7 @@ class ContactFormController extends Controller
             return redirect()->back()->withErrors($v->errors());
         }
         ContactForm::create($this->request->all());
-        return redirect()->back()->with('success', 'Contact form submitted successfully!');
+        return redirect('/contact')->with('success', 'Contact form submitted successfully!');
     }
     
 }

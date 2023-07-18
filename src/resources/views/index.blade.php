@@ -12,55 +12,33 @@
 
 <body>
     <div class="container">
-        <h1>Contact Form</h1>
-        <div>
-            @if (session('success'))
+        <h1>Contact Forms</h1>
+        @if (session('success'))
                 <div class="col-sm-12">
                     <div class="alert  alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
                     </div>
                 </div>
             @endif
-            <form method="POST" action="{{ route('contactFormSubmit') }}" > 
-                <input type="hidden" name="_method" value="POST">
-
-                {!! csrf_field() !!}
-
-                <div class="form-group">
-                    <label class="form-label">First Name</label>
-                    <input type="text" name="first_name" class="form-control  @error('first_name') is-invalid @enderror" />
-                    @error('first_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" />
-                    @error('last_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Message</label>
-                    <textarea type="text" name="message" class="form-control @error('message') is-invalid @enderror" ></textarea>
-                    @error('message')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="form-group text-center">
-                    <button class="btn btn-primary m-2">Submit</button>
-                </div>
-            </form>
-        </div>
+             <a href="{{ route('contact.create') }}" class="btn btn-primary">Create</a>
+        <table class="table table-striped "> 
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($contactForms as $contactForm)
+                    <tr scope="row">
+                        <td>{{ $contactForm->first_name }}</td>
+                        <td>{{ $contactForm->last_name }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </body>
 </html>

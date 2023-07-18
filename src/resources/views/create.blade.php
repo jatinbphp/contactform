@@ -21,6 +21,8 @@
                     </div>
                 </div>
             @endif
+           
+
             <form method="POST" action="{{ route('contactFormSubmit') }}" > 
                 <input type="hidden" name="_method" value="POST">
 
