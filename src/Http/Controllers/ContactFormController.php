@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Jatinbphp\Contactform\Models\ContactForm;
 use Log;
+use Validator;
 
 class ContactFormController extends Controller
 {
@@ -17,15 +18,28 @@ class ContactFormController extends Controller
     public function __construct(Request $request) {
         $this->request = $request;
     }
+
+    public function index() {
+        $contactForms = ContactForm::all();
+        return view('contactForm::index', compact('contactForms'));
+    }
     public function contactForm() {
-        Log::info("All Country API");
-        // echo 121254;
-        return view('contactForm::index');
-        //return response()->json(['languages' => getLanguages() ], 200);
+        
+        return view('contactForm::create');
     }
     public function Submit() {
-        // dd($this->request->all());
+        $v = Validator::make($this->request->all(), [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'message' => 'required',
+        ]);
+     
+        if ($v->fails())
+        {
+            return redirect()->back()->withErrors($v->errors());
+        }
         ContactForm::create($this->request->all());
+        return redirect()->back()->with('success', 'Contact form submitted successfully!');
     }
     
 }
