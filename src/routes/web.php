@@ -5,5 +5,8 @@
     // Route::get('contact',  function(){
     //     return 'Hello from the contact form package';
     // });
-    Route::get('/contact', [ContactFormController::class, 'contactForm']);
+    Route::group([ 'middleware' =>['web']], function ($router) {
+        Route::get('/contact', [ContactFormController::class, 'contactForm']);
+        Route::post('/submit-contact-form', [ContactFormController::class, 'Submit'])->name('contactFormSubmit');
+    });
 ?>
